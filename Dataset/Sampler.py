@@ -36,7 +36,12 @@ def _sample_around_edges(plane, pca_projected_vertices, n_samples, radius):
     edges_2d = pca_projected_vertices[plane.edges]
     edges_directions = edges_2d[:, 0, :] - edges_2d[:, 1, :]
     edge_normals = edges_directions @ np.array([[0, 1], [-1, 0]])
-    edge_normals /= np.linalg.norm(edge_normals, axis=1)[:, None]
+    # safe normalize: avoid divide-by-zero when an edge direction projects to zero (degenerate)
+    norms = np.linalg.norm(edge_normals, axis=1)
+    # replace zeros with 1.0 to avoid NaNs (zero normals will stay zero vector)
+    if norms.size > 0:
+        norms[norms == 0] = 1.0
+        edge_normals /= norms[:, None]
     dist = np.linspace(0, 1, n_samples, endpoint=False)
     xys_around_edges = np.empty((0, 2))
     xys_on_edge = np.empty((0, 2))
@@ -93,8 +98,10 @@ def sample_plane(plane, refinment_level):
     labels_around_contour = labeler(xys_around_contour)
     labels_on_contour = np.full(len(xys_on_contour), (INSIDE_LABEL + OUTSIDE_LABEL) / 2)
 
-    return pca.inverse_transform(np.concatenate((xys_around_contour, xys_on_contour))), np.concatenate(
-        (labels_around_contour, labels_on_contour))
+    # return also the labeler and pca so callers can repair ambiguous samples (0.5)
+    return (pca.inverse_transform(np.concatenate((xys_around_contour, xys_on_contour))),
+            np.concatenate((labels_around_contour, labels_on_contour)),
+            labeler, pca, plane.normal)
 
 
 def sample_hull(csl):

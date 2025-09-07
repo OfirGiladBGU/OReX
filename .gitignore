@@ -3,3 +3,9 @@
 /env/
 /artifacts/
 /output/
+
+.vscode/
+__pycache__/
+Artifacts/
+parse/
+pipeforge/

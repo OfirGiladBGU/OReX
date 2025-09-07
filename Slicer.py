@@ -16,6 +16,30 @@ from Dataset.Helpers import plane_origin_from_params
 def _get_verts_faces(filename):
     scene = trimesh.load_mesh(filename)
 
+    # Clean the mesh: remove duplicate and degenerate faces and merge identical vertices.
+    # This reduces zero-length edges after slicing (which caused NaNs during normalization).
+    pre_v = len(scene.vertices) if hasattr(scene, 'vertices') else 0
+    pre_f = len(scene.faces) if hasattr(scene, 'faces') else 0
+
+    try:
+        # remove exact duplicate faces
+        if hasattr(scene, 'remove_duplicate_faces'):
+            scene.remove_duplicate_faces()
+        # remove degenerate (zero-area) faces
+        if hasattr(scene, 'remove_degenerate_faces'):
+            scene.remove_degenerate_faces()
+        # merge identical vertices (collapses duplicates)
+        if hasattr(scene, 'merge_vertices'):
+            scene.merge_vertices()
+    except Exception:
+        # don't fail the pipeline on unexpected trimesh behavior; continue with original mesh
+        pass
+
+    post_v = len(scene.vertices) if hasattr(scene, 'vertices') else 0
+    post_f = len(scene.faces) if hasattr(scene, 'faces') else 0
+    if pre_v != post_v or pre_f != post_f:
+        print(f"mesh cleanup: verts {pre_v}->{post_v}, faces {pre_f}->{post_f}")
+
     verts = scene.vertices
     faces = scene.faces
 

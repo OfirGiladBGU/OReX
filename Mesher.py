@@ -95,6 +95,18 @@ def _save_vert_placement(f, resolution, file_name):
 
     abs_ratios = [abs(ratio) for ratios in all_changes_ratios for ratio in ratios]
 
+    # filter out invalid values
+    abs_ratios = [r for r in abs_ratios if np.isfinite(r)]
+    if len(abs_ratios) == 0:
+        # nothing to plot, create an empty placeholder figure
+        plt.figure()
+        plt.text(0.5, 0.5, 'no data', horizontalalignment='center', verticalalignment='center')
+        plt.savefig(output_path + file_name, dpi=500)
+        plt.close()
+        plt.cla()
+        plt.clf()
+        return
+
     plt.hist(abs_ratios, density=True, bins=100, range=(0, 1))
     plt.savefig(output_path + file_name, dpi=500)
     plt.close()
