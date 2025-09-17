@@ -25,7 +25,7 @@ torch==1.13.1+cu117
     - `parse_preds_fixed/input`
 - Run the `run_Slicer.py` to create slices for both labels and preds_fixed
 - Run the `run_Main.py` to get the final OReX predictions.
-- Copy the results to `TreesAutoEncoder` under: `datasets_visualize/orex`.
+- Copy the results to `TreesAutoEncoder` under: `datasets_visualize/orex/data_original`.
 - Copy the `parse_labels` (as `labels`) and `parse_preds_fixed` (as `preds_fixed`).
 - Remove uncessary files:
     - Unused `obj` files in `input` folders
