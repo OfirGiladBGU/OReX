@@ -1,0 +1,28 @@
+# Conda Setup:
+
+## To create a conda environment with Python 3.10:
+conda create -n orex python=3.10
+
+## To activate the environment:
+conda activate orex
+
+## After activation, install requirements:
+pip install -r requirements.txt
+
+## For CUDA support (PyTorch), use the following in requirements.txt:
+torch==1.13.1+cu117
+# And add the following line at the top of requirements.txt:
+--extra-index-url https://download.pytorch.org/whl/cu117
+
+## This ensures PyTorch is installed with CUDA 11.7 support.
+
+---
+
+# Files Setup:
+
+- Use the copy script in `TreesAutoEncoder` to create the dirs:
+    - `parse_labels/input`
+    - `parse_preds_fixed/input`
+- Run the `run_Slicer.py` to create slices for both labels and preds_fixed
+- Run the `run_Main.py` to get the final OReX predictions.
+- Copy the results to `TreesAutoEncoder` and apply the required convertion to npy files.
