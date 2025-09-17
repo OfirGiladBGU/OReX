@@ -26,3 +26,12 @@ torch==1.13.1+cu117
 - Run the `run_Slicer.py` to create slices for both labels and preds_fixed
 - Run the `run_Main.py` to get the final OReX predictions.
 - Copy the results to `TreesAutoEncoder` and apply the required convertion to npy files.
+
+---
+
+The commands format in use:
+
+```bash
+python3 Slicer.py ./parse_preds_fixed/input/PA000005_vessel.obj ./parse/slices 100
+python3 Main.py ./parse_preds_fixed/output ./parse/slices/PA000005_vessel.csl --cuda_device 0 
+```
