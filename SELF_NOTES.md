@@ -25,7 +25,12 @@ torch==1.13.1+cu117
     - `parse_preds_fixed/input`
 - Run the `run_Slicer.py` to create slices for both labels and preds_fixed
 - Run the `run_Main.py` to get the final OReX predictions.
-- Copy the results to `TreesAutoEncoder` and apply the required convertion to npy files.
+- Copy the results to `TreesAutoEncoder` under: `datasets_visualize/orex`.
+- Copy the `parse_labels` (as `labels`) and `parse_preds_fixed` (as `preds_fixed`) and remove the uncessary files:
+    - Unused `obj` files in `input` folders
+    - The `csl` and `ply` files in `slices` folders
+- Run the `datasets_visualize/restore_original_scale.py` script for scale fix.
+- Run the `datasets_visualize/translate_and_voxelize.py` script for voxelization alignment.
 
 ---
 
