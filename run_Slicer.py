@@ -2,9 +2,13 @@ import os
 import subprocess
 import pathlib
 
-input_folder = './parse/input'
-output_folder = './parse/slices'
-log_folder = './log1'
+# input_folder = './parse_labels/input'
+# output_folder = './parse_labels/slices'
+# log_folder = './log1_labels'
+
+input_folder = './parse_preds_fixed/input'
+output_folder = './parse_preds_fixed/slices'
+log_folder = './log1_preds_fixed'
 num = '100'
 
 # Create log folder if it doesn't exist

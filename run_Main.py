@@ -2,8 +2,8 @@ import os
 import subprocess
 import pathlib
 
-input_folder = './parse/slices'
-output_folder = './parse/output'
+input_folder = './parse_preds_fixed/slices'
+output_folder = './parse_preds_fixed/output'
 log_folder = './log2'
 num = '0'
 
