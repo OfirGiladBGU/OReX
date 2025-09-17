@@ -20,7 +20,7 @@ torch==1.13.1+cu117
 
 # Files Setup:
 
-- Use the copy script in `TreesAutoEncoder` to create the dirs:
+- Use the copy script in `TreesAutoEncoder` (under: `datasets_visualize/copy_to_repo` dir) to create the dirs:
     - `parse_labels/input`
     - `parse_preds_fixed/input`
 - Run the `run_Slicer.py` to create slices for both labels and preds_fixed
@@ -33,8 +33,8 @@ torch==1.13.1+cu117
     - All the files in the `output` folder expect the `mesh_last_300.obj` files.
 - Update the files:
     - Every `mesh_last_300.obj` file renambe by it's sub folder name and put it in the output folder.
-- Run the `datasets_visualize/restore_original_scale.py` script for scale fix.
-- Run the `datasets_visualize/translate_and_voxelize.py` script for voxelization alignment.
+- [In `TreesAutoEncoder`] Run the `datasets_visualize/restore_original_scale.py` script for scale fix.
+- [In `TreesAutoEncoder`] Run the `datasets_visualize/translate_and_voxelize.py` script for voxelization alignment.
 
 ---
 
