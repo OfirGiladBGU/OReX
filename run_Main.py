@@ -8,6 +8,7 @@ log_folder = './log2'
 num = '0'
 
 # Create log folder if it doesn't exist
+os.makedirs(output_folder, exist_ok=True)
 os.makedirs(log_folder, exist_ok=True)
 
 filenames = sorted(pathlib.Path(input_folder).glob("*.csl"))

@@ -12,6 +12,7 @@ log_folder = './log1_preds_fixed'
 num = '100'
 
 # Create log folder if it doesn't exist
+os.makedirs(output_folder, exist_ok=True)
 os.makedirs(log_folder, exist_ok=True)
 
 filenames = sorted(pathlib.Path(input_folder).glob("*.obj"))
